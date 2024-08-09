@@ -20,7 +20,11 @@ Route::prefix('user')->group(function () {
 // Mail should include My name at the footer of the submission mail
 // Endpoint will have an authentication for only authenticated users can access this endpoints✅
 // provide the auth token for use by the frontend developer✅
-//
+
+// Patient model
+// xray model
+// ctScanModel
+// medical history
 
 
 // Bonus if you can implement the 2 endpoints to 1 using lighthouse-php graphql

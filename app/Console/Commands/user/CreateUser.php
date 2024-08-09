@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\user;
 
+use App\Enums\Mocks;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
@@ -23,6 +24,19 @@ class CreateUser extends Command
      */
     protected $description = 'Command to find or create a new user for the database';
 
+    /*
+    |--------------------------------------------------------------------------
+    |  Query user from the terminal
+    |--------------------------------------------------------------------------
+    */
+    protected function getUserData()
+    {
+        return [
+            'email' => $this->ask('Input your Email:'),
+            'password' => $this->secret('Input User Password:'),
+        ];
+    }
+
     /**
      * Execute the console command.
      */
@@ -30,7 +44,7 @@ class CreateUser extends Command
     {
         /*
         |--------------------------------------------------------------------------
-        | calling terminal request
+        | terminal request
         |--------------------------------------------------------------------------
         */
         $data = $this->getUserData();
@@ -59,8 +73,8 @@ class CreateUser extends Command
         |--------------------------------------------------------------------------
         */
         $create_user_payload = [
-            'email' => $data['email'] ?? "user@example.com",
-            'password' => $data['password'] == null ? Hash::make($data['password']) : Hash::make("123456789"),
+            'email' => $data['email'] ?? Mocks::USER_EMAIL->value,
+            'password' => $data['password'] == null ? Hash::make($data['password']) : Hash::make(Mocks::USER_PASSWORD->value),
         ];
 
         /*
@@ -72,13 +86,17 @@ class CreateUser extends Command
 
         /*
         |--------------------------------------------------------------------------
-        | generate Token
+        | Generate a token for the user
         |--------------------------------------------------------------------------
         */
-        // Generate a token for the user
+
         $token = $user->createToken('API Token')->plainTextToken;
 
-        // Return the token in the response
+        /*
+        |--------------------------------------------------------------------------
+        |set payload
+        |--------------------------------------------------------------------------
+        */
         $response = [
             'token_type' => 'Bearer',
             'access_token' => $token,
@@ -86,7 +104,7 @@ class CreateUser extends Command
 
         /*
         |--------------------------------------------------------------------------
-        | retrieving token
+        |  Return the token in the response
         |--------------------------------------------------------------------------
         */
         $this->info('Retrieving token.....');
@@ -94,12 +112,4 @@ class CreateUser extends Command
 
     }
 
-
-    protected function getUserData()
-    {
-        return [
-            'email' => $this->ask('Input your Email:'),
-            'password' => $this->secret('Input User Password:'),
-        ];
-    }
 }
