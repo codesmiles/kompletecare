@@ -11,8 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-
-        $generate_id = generateId();
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
             $table->string('name')->default("Patient_0");

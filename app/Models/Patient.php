@@ -9,6 +9,10 @@ class Patient extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name'
+    ];
+
     public function medicalRecords()
     {
         return $this->hasMany(MedicalRecord::class);

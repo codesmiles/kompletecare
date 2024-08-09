@@ -1,22 +1,19 @@
 <?php
 
-use Illuminate\Support\Str;
-function generateId(): string 
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Contracts\Mail\Mailable;
+
+/*
+|--------------------------------------------------------------------------
+| send email laboratoryTest Email
+|--------------------------------------------------------------------------
+*/
+function sendEmail(string $email, Mailable $mailable_instance): void
 {
-   $value = mt_rand(0,100);
-
-    return $value;
+    try {
+        Mail::to($email)->send($mailable_instance);
+    } catch (\Exception $e) {
+        Log::error('Failed to send email: ' . $e->getMessage());
+    }
 }
-
-
-
-//  function sendEmail()
-//     {
-//         $data = [
-//             'name' => 'John Doe',
-//             'test_results' => 'Positive',
-//             // Add any other data you want to pass to the email
-//         ];
-
-//         Mail::to('peopleoperations@kompletecare.com')->send(new LaboratoryTestMail($data));
-//     }

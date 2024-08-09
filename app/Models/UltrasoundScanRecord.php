@@ -9,6 +9,15 @@ class UltrasoundScanRecord extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'pelvis',
+        'thyroid',
+        'breasts',
+        'prostate',
+        'obstetric',
+        'abdominal',
+    ];
+
     public function medicalRecord()
     {
         return $this->belongsTo(MedicalRecord::class);

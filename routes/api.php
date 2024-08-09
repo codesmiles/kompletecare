@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LaboratoryTestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -8,16 +9,16 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::prefix('user')->group(function () {
-    // Route::post('/submit_lab_test', [\App\Http\Controllers\UserController::class, 'update']);
-    // Route::get('/get_lab_tests', []);
+    Route::post('/submit_lab_test', [LaboratoryTestController::class, 'show']);
+    Route::get('/get_lab_tests', []);
 });
 
 // TODO: GET-> Lab tests
 
 // TODO POST lab tests
 // post request of the lab-test to the database
-// mailing service to peopleoperations@kompletecare.com
-// Mail should include My name at the footer of the submission mail
+// mailing service to peopleoperations@kompletecare.com✅
+// Mail should include My name at the footer of the submission mail✅
 // Endpoint will have an authentication for only authenticated users can access this endpoints✅
 // provide the auth token for use by the frontend developer✅
 
@@ -27,9 +28,9 @@ Route::prefix('user')->group(function () {
 // medical history
 
 
-// Bonus if you can implement the 2 endpoints to 1 using lighthouse-php graphql
+// Bonus if you can implement the 2 endpoints to 1 using lighthouse-php graphql❌
 // send the link to this submisstion to peopleoperations@kompletecare.com
-// Submission deadline is on or before 12 noon on Monday 12th August, 2024
+// Submission is by email to peopleoperations@kompletecare.com. Specify the endpoints and the bearer auth token to be used for testing in your submission.
 
 
 /*

@@ -9,6 +9,10 @@ class MedicalRecord extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'patient_id',
+        'notes'
+    ];
     public function patient()
     {
         return $this->belongsTo(Patient::class);

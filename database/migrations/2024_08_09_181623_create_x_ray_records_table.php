@@ -31,7 +31,6 @@ return new class extends Migration
             $table->string('femoral')->nullable();
             $table->string('ankle')->nullable();
             $table->string('humerus')->nullable();
-            $table->string('humerus')->nullable();
             $table->string('radius/ulner')->nullable();
             $table->string('foot')->nullable();
             $table->string('tibia/fibula')->nullable();
