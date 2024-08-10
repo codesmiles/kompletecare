@@ -29,7 +29,7 @@ class LaboratoryTestMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Laboratory Test registration',
+            subject: "{$this->data["user_name"]}'s medical Data",
         );
     }
 
@@ -53,10 +53,4 @@ class LaboratoryTestMail extends Mailable
         return [];
     }
 
-
-    // public function build()
-    // {
-    //     return $this->view('emails.welcome')
-    //         ->subject('Welcome to our application');
-    // }
 }

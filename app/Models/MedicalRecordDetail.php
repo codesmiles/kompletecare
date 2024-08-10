@@ -5,16 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Patient extends Model
+class MedicalRecordDetail extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        "description",
+        'medical_record_type_id',
     ];
 
-    public function medicalRecords()
+    public function medicalRecordTypes()
     {
-        return $this->hasMany(MedicalRecord::class);
+        return $this->belongsTo(MedicalRecordType::class);
     }
+
 }

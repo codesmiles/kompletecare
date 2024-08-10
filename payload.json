@@ -1,0 +1,21 @@
+{
+    "record_name": "x-ray",
+    "types": [
+        {
+            "name": "toes",
+            "details": [
+                {
+                    "description": "the toes scan here"
+                }
+            ]
+        },
+        {
+            "name": "sacro_iliac_joint",
+            "details": [
+                {
+                    "description": "sacro_iliac_joint scan"
+                }
+            ]
+        }
+    ]
+}

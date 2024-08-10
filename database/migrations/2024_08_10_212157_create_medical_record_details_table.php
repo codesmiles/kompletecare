@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('patients', function (Blueprint $table) {
+        Schema::create('medical_record_details', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->default("Patient_0");
+            $table->foreignId('medical_record_type_id')->constrained();
+            $table->string("description");
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('patients');
+        Schema::dropIfExists('medical_record_details');
     }
 };

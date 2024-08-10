@@ -1,73 +1,37 @@
 <?php
 
-namespace App\Console\Commands\user;
+namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Enums\Mocks;
 use App\Models\User;
-use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class CreateUser extends Command
+class AuthenticateUser extends Controller
 {
     /**
-     * The name and signature of the console command.
-     *
-     * @var string
+     * Handle the incoming request.
      */
-    protected $signature = 'app:authenticate-user';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Command to find or create a new user for the database';
-
-    /*
-    |--------------------------------------------------------------------------
-    |  Query user from the terminal
-    |--------------------------------------------------------------------------
-    */
-    protected function getUserData()
+    public function __invoke(Request $request)
     {
-        return [
-
-            'name' => $this->ask('Input your Name:'),
-            'email' => $this->ask('Input your Email:'),
-            'password' => $this->secret('Input User Password:'),
-        ];
-    }
-
-    /**
-     * Execute the console command.
-     */
-    public function handle()
-    {
-        /*
-        |--------------------------------------------------------------------------
-        | terminal request
-        |--------------------------------------------------------------------------
-        */
-        $data = $this->getUserData();
 
         /*
         |--------------------------------------------------------------------------
         | validating parameters
         |--------------------------------------------------------------------------
         */
-        $validator = Validator::make($data, [
-            'name' => ['nullable','string','max:255'],
+        $validator = Validator::make($request->all(), [
+            'name' => ['nullable', 'string', 'max:255'],
             'email' => ['email', 'max:255', 'unique:users,email', "nullable"],
-            'password' => [ 'string', 'min:8', "nullable"],
+            'password' => ['string', 'min:8', "nullable"],
         ]);
 
         if ($validator->fails()) {
-            $this->error('User creation failed due to validation errors:');
-            foreach ($validator->errors()->all() as $error) {
-                $this->error($error);
-            }
-            return;
+            return response()->json([
+                "success" => false,
+                "response" => $validator->errors()
+            ], 400);
         }
 
         /*
@@ -76,9 +40,9 @@ class CreateUser extends Command
         |--------------------------------------------------------------------------
         */
         $create_user_payload = [
-            'name' => $data['name'] ?? Mocks::USER_NAME->value,
-            'email' => $data['email'] ?? Mocks::USER_EMAIL->value,
-            'password' => $data['password'] == null ? Hash::make($data['password']) : Hash::make(Mocks::USER_PASSWORD->value),
+            'name' => $request->name ?? Mocks::USER_NAME->value,
+            'email' => $request->email ?? Mocks::USER_EMAIL->value,
+            'password' => $request->password == null ? Hash::make($request->password) : Hash::make(Mocks::USER_PASSWORD->value),
         ];
 
         /*
@@ -111,9 +75,10 @@ class CreateUser extends Command
         |  Return the token in the response
         |--------------------------------------------------------------------------
         */
-        $this->info('Retrieving token.....');
-        $this->info(json_encode($response));
-
+        return response()->json([
+            "success" => true,
+            "response" => $response
+        ], 200);
     }
 
 }

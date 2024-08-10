@@ -10,22 +10,18 @@ class MedicalRecord extends Model
     use HasFactory;
 
     protected $fillable = [
-        'patient_id',
-        'notes'
+        'name',
+        "user_id",
     ];
-    public function patient()
+
+    public function user()
     {
-        return $this->belongsTo(Patient::class);
+        return $this->belongsTo(User::class);
     }
 
-    public function xrayRecord()
+    public function medicalRecordTypes()
     {
-        return $this->hasOne(XrayRecord::class);
-    }
-
-    public function ultrasoundRecord()
-    {
-        return $this->hasOne(UltrasoundScanRecord::class);
+        return $this->hasMany(MedicalRecordType::class);
     }
 
 

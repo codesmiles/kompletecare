@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('medical_records', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('patient_id')->constrained()->onDelete('cascade');
-            $table->string('type'); // e.g., X-ray, Ultrasound, CT-Scan, MRI
+            $table->string('name');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

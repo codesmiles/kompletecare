@@ -4,7 +4,7 @@
         <title>Lab Mail Notification</title>
     </head>
     <body>
-        <h1>Hello, {{ $userName }}</h1>
+        <h1>Hello, {{ $user_name }}</h1>
         <p>This is a notification email.</p>
 
         <p>Best regards,</p>
