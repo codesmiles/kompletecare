@@ -17,18 +17,41 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-       $user = User::factory()->create([
+        /*
+        |--------------------------------------------------------------------------
+        | Seed the medical test and medical test type
+        |--------------------------------------------------------------------------
+        */
+        $this->call([
+            MedicalTestSeeder::class,
+            MedicalTestTypeSeeder::class,
+        ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | seed user
+        |--------------------------------------------------------------------------
+        */
+        $user = User::factory()->create([
             "name" => Mocks::USER_NAME->value,
             'email' =>  Mocks::USER_EMAIL->value,
             'password' => Hash::make(Mocks::USER_PASSWORD->value),
         ]);
 
-        // Create a Medical Record
+        /*
+        |--------------------------------------------------------------------------
+        | Create a Medical Record
+        |--------------------------------------------------------------------------
+        */
         $medicalRecord = $user->medicalRecord()->create([
             'name' => 'x-ray',
         ]);
 
-        // Create Medical Record Types and Details
+        /*
+        |--------------------------------------------------------------------------
+        | Create Medical Record Types and Details
+        |--------------------------------------------------------------------------
+        */
         $headType = $medicalRecord->medicalRecordTypes()->create(['name' => 'Head']);
         $brainType = $medicalRecord->medicalRecordTypes()->create(['name' => 'Brain']);
 

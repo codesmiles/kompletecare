@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Enums\Mocks;
+use App\Models\MedicalTest;
 use Illuminate\Http\Request;
 use App\Models\MedicalRecord;
+use App\Models\MedicalTestType;
 use App\Mail\LaboratoryTestMail;
 use App\Models\MedicalRecordType;
 use Illuminate\Support\Facades\Validator;
@@ -45,8 +47,21 @@ class LaboratoryTestController extends Controller
         |--------------------------------------------------------------------------
         */
         $validator = Validator::make($request->all(), [
-            'record_name' => 'required|string',
-            'types' => 'required|array',
+            'record_name' => 'required|string|exists:medical_tests,name',
+            'types' => [
+                'required',
+                "array",
+                function ($attribute, $value, $fail) use ($request) {
+                    $medicalTestId = MedicalTest::where('name', $request->record_name)->value('id');
+                    $validTypes = MedicalTestType::where('medical_test_id', $medicalTestId)->pluck('type');
+
+                    foreach ($value as $type) {
+                        if (!$validTypes->contains($type['name'])) {
+                            $fail("The type '{$type['name']}' is not valid for the specified medical record.");
+                        }
+                    }
+                }
+            ],
             'types.*.name' => 'required|string',
             'types.*.details' => 'required|array',
             'types.*.details.*.description' => 'required|string',
@@ -78,8 +93,8 @@ class LaboratoryTestController extends Controller
             'medical_record' => [
                 'name' => $medicalRecord->name,
                 'types' => []
-                ]
-            ];
+            ]
+        ];
 
         /*
         |--------------------------------------------------------------------------

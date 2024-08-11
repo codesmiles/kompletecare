@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\MedicalTest;
 use App\Models\MedicalRecord;
+use App\Models\MedicalTestType;
 use Illuminate\Database\Seeder;
 use App\Models\MedicalRecordType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -50,12 +52,12 @@ class MedicalTestTypeSeeder extends Seeder
         ];
 
         foreach ($testTypes as $testName => $types) {
-            $medicalTest = MedicalRecord::where('name', $testName)->first();
+            $medicalTest = MedicalTest::where('name', $testName)->first();
 
             if ($medicalTest) {
                 foreach ($types as $type) {
-                    MedicalRecordType::create([
-                        'medical_record_id' => $medicalTest->id,
+                    MedicalTestType::create([
+                        'medical_test_id' => $medicalTest->id,
                         'type' => $type,
                     ]);
                 }

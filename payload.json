@@ -5,15 +5,15 @@
             "name": "toes",
             "details": [
                 {
-                    "description": "the toes scan here"
+                    "description": "Detailed description for Head MRI scan"
                 }
             ]
         },
         {
-            "name": "sacro_iliac_joint",
+            "name": "foot",
             "details": [
                 {
-                    "description": "sacro_iliac_joint scan"
+                    "description": "Detailed description for Brain MRI scan"
                 }
             ]
         }
