@@ -28,13 +28,4 @@ Route::prefix('user')->middleware('auth:sanctum')->group(function () {
     Route::post('/laboratory_test', [LaboratoryTestController::class, 'store']);
 });
 
-// TODO: GET-> Lab tests
-
-// TODO POST lab tests
-// post request of the lab-test to the database
-// mailing service to peopleoperations@kompletecare.com✅
-// Mail should include My name at the footer of the submission mail✅
-// Endpoint will have an authentication for only authenticated users can access this endpoints✅
-// provide the auth token for use by the frontend developer✅
-
 
