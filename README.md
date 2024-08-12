@@ -37,7 +37,3 @@ Implementation criteria [CLICK HERE](/SEVENZ%20HEALTHCARE%20BACKEND%20DEVELOPER%
 - mailing service to <peopleoperations@kompletecare.com>✅
 - Mail should include My name at the footer of the submission mail✅
 - Endpoint will have an authentication for only authenticated users can access this endpoints✅
-
- send the link to this submisstion to <peopleoperations@kompletecare.com>
- Submission is by email to <peopleoperations@kompletecare.com>. 
- Specify the endpoints and the bearer auth token to be used for testing in your submission.
