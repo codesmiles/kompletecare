@@ -33,7 +33,7 @@ Implementation criteria [CLICK HERE](/SEVENZ%20HEALTHCARE%20BACKEND%20DEVELOPER%
 ## TASKS
 
 - provide the auth token for use by the frontend developer✅
-- post request of the lab-test to the database✅
+- get and post request of the lab-test to the database✅
 - mailing service to <peopleoperations@kompletecare.com>✅
 - Mail should include My name at the footer of the submission mail✅
 - Endpoint will have an authentication for only authenticated users can access this endpoints✅
