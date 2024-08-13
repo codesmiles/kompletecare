@@ -3,7 +3,8 @@
 ## Setup Requirements
 
 - Have docker desktop installed on your pc and in the root directory type ```sh docker-compose up```
-- seed data to the database in the project root directory -> ```sh sail artisan db:seed```
+- 
+- seed data to the database in the project root directory -> ```sh sail artisan migrate --seed```
 - you have errors using sail shorten sail command in the project root directory of the project (in case sail refuse to work) -> ```sh alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'```
 - You can authenticate a User by generating a bearer token through the terminal ```sh sail artisan app:authenticate-user``` or using the authenticate user endpoint ```sh http://0.0.0.0:80/api/authenticate_user```
 - environment variables need to be provided by an email provider example mailtrap was used as a mailing platform for this project

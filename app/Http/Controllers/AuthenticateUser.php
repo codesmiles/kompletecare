@@ -57,12 +57,11 @@ class AuthenticateUser extends Controller
         | Generate a token for the user
         |--------------------------------------------------------------------------
         */
-
         $token = $user->createToken('API Token')->plainTextToken;
 
         /*
         |--------------------------------------------------------------------------
-        |set payload
+        | set payload
         |--------------------------------------------------------------------------
         */
         $response = [
